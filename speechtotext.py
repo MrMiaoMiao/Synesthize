@@ -3,10 +3,21 @@ import speech_recognition as sr
 r = sr.Recognizer()
 
 mic = sr.Microphone()
-with mic as source:
-	print("listening...")
-	r.adjust_for_ambient_noise(source, duration=0.5)
-	audio = r.listen(source)
+
+with mic as source:             
+    print("listening...")
+    while True:
+
+        audio = r.listen(source)
+        r.adjust_for_ambient_noise(source, duration=0.5)
+        try:
+            result = r.recognize_google(audio)
+            print("You said " + result)
+            words = result.lower()
+            if words=="stop":
+                break
+        except LookupError:
+            print("Please, speak more clearly")		
 
 '''
 file = sr.AudioFile('file.wav')
@@ -15,7 +26,6 @@ with file as source:
 	audio = r.record(source)
 '''
 print("done")
-print(r.recognize_google(audio))
 
 
 
