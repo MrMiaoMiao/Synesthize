@@ -100,7 +100,7 @@ for i in range(num_words):
 	word = timestamps[i][0]
 	tts.speak(word)
 	stm.stereo_to_mono("./output.wav", "./output.wav")
-	viz.visualize_sound("./chunk" + str(i) + ".wav", "./output.wav", word)
+	viz.visualize_sound("./words/chunk" + str(i) + ".wav", "./output.wav", word)
 # os.system("rm output.wav")
 print ('done')
 viz.pause()

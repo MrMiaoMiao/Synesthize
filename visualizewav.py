@@ -1,4 +1,3 @@
-from dtw import dtw
 import matplotlib.pyplot as plot
 from scipy.io import wavfile
 import numpy as np
@@ -7,35 +6,26 @@ def visualize_sound(infile,tarfile, word):
 	inputFrequency, inputaudio = wavfile.read(infile)
 	targetFreq, targetaudio = wavfile.read(tarfile) 
 
-	audio = np.array(inputaudio)
-	target = np.array(targetaudio)
+	fig=plot.figure()
+	ax=fig.add_subplot(111, label="1")
+	ax2=fig.add_subplot(111, label="2", frame_on=False)
 
-	a = 0
-	a_sum = 0
-	for x in audio:
-		if (x.all() > 0):
-			a_sum += x
-			a+=1
-	a_mean = a_sum/a
+	ax.plot(inputaudio, label="original audio", color="green", alpha=0.5)
+	ax.set_xlabel("Original Sample (s)", color="C0")
+	ax.set_ylabel("Original Amplitude", color="C0")
+	ax.tick_params(axis='x', colors="C0")
+	ax.tick_params(axis='y', colors="C0")
+	
+	ax2.plot(targetaudio, label="sample audio", color="blue", alpha=0.5)
+	ax2.xaxis.tick_top()
+	ax2.yaxis.tick_right()
+	ax2.set_xlabel('Target Sample (s)', color="C1") 
+	ax2.set_ylabel('Target Amplitude', color="C1")       
+	ax2.xaxis.set_label_position('top') 
+	ax2.yaxis.set_label_position('right') 
+	ax2.tick_params(axis='x', colors="C1")
+	ax2.tick_params(axis='y', colors="C1")
 
-	t = 0
-	t_sum = 0
-	for x in target:
-		if (x.all()> 0):
-			t_sum += x
-			t+=1
-	t_mean = t_sum/t
-
-
-	factor = t_mean / a_mean
-	resultAudio = [x * factor for x in audio]
-
-	plot.figure(1)
-	plot.title(word)
-	plot.xlabel('Sample')
-	plot.ylabel('Amplitude')
-	plot.plot(resultAudio, label="sample audio", color="blue", alpha=0.5)
-	plot.plot(targetaudio, label="target audio", color="yellow", alpha=0.5)
 	plot.show()
 
 def pause():
