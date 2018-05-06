@@ -8,3 +8,4 @@ def slice(infile, timestamps):
 		piece.export("chunk" + str(i) + ".wav", format="wav")
 		i = i + 1
 		print("you said \"" + time[0] + "\" between " + str(time[1]) + " and " + str(time[2]))
+	return i

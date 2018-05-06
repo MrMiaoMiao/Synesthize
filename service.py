@@ -95,10 +95,12 @@ task.run()
 ##########################################################################
 
 timestamps, transcript, confidence = stt.text_times("./file.wav")
-sl.slice("./file.wav",timestamps)
-tts.speak(transcript)
-stm.stereo_to_mono("./output.wav", "./output.wav")
-viz.visualize_sound("./file.wav", "./output.wav")
+num_words = sl.slice("./file.wav",timestamps)
+for i in range(num_words):
+	word = timestamps[i][0]
+	tts.speak(word)
+	stm.stereo_to_mono("./output.wav", "./output.wav")
+	viz.visualize_sound("./chunk" + str(i) + ".wav", "./output.wav", word)
 # os.system("rm output.wav")
 print ('done')
 viz.pause()
