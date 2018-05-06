@@ -20,3 +20,7 @@ pip3 install matplotlib
 ```
 
 ## Try it out here:
+
+```
+python3 service.py
+```
